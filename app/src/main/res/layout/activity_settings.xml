@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tvTidehit"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingsActivity">
+
+    <Button
+        android:id="@+id/btnoutsettings"
+        android:layout_width="108dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="14dp"
+        android:text="Sign Out"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rgpWave" />
+
+    <Switch
+        android:id="@+id/sthNightMode"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="10dp"
+        android:text="Night Mode"
+        app:layout_constraintBottom_toTopOf="@+id/tvMaps"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvMaps"
+        android:layout_width="42dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="10dp"
+        android:text="Maps"
+        app:layout_constraintBottom_toTopOf="@+id/tvDistances"
+        app:layout_constraintEnd_toEndOf="@+id/tvSpeed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sthNightMode" />
+
+    <RadioGroup
+        android:id="@+id/rgpDistances"
+        android:layout_width="380dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="6dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvSpeed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDistances">
+
+        <RadioButton
+            android:id="@+id/rbtnDistances1"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Miles, feet" />
+
+        <RadioButton
+            android:id="@+id/rbtnDistances2"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Nautical miles" />
+
+        <RadioButton
+            android:id="@+id/rbtnDistances3"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Kilometers, meters" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tvDistances"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="Distances:"
+        app:layout_constraintBottom_toTopOf="@+id/rgpDistances"
+        app:layout_constraintEnd_toEndOf="@+id/tvMaps"
+        app:layout_constraintStart_toEndOf="@+id/tvMaps"
+        app:layout_constraintTop_toBottomOf="@+id/tvMaps" />
+
+    <TextView
+        android:id="@+id/tvSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="9dp"
+        android:layout_marginBottom="16dp"
+        android:text="Speed:"
+        app:layout_constraintBottom_toTopOf="@+id/rgpSpeed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rgpDistances" />
+
+    <RadioGroup
+        android:id="@+id/rgpSpeed"
+        android:layout_width="380dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvWeather"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSpeed">
+
+        <RadioButton
+            android:id="@+id/rbtnSpeed1"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Kilometers per hour(km/h)" />
+
+        <RadioButton
+            android:id="@+id/rbtnSpeed2"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Miles per hour(mph)" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tvWeather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="4dp"
+        android:text="Weather"
+        app:layout_constraintBottom_toTopOf="@+id/tvTemperature"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rgpSpeed" />
+
+    <TextView
+        android:id="@+id/tvTemperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="13dp"
+        android:layout_marginBottom="9dp"
+        android:text="Temperature:"
+        app:layout_constraintBottom_toTopOf="@+id/rgpTemperature"
+        app:layout_constraintStart_toStartOf="@+id/tvWeather"
+        app:layout_constraintTop_toBottomOf="@+id/tvWeather" />
+
+    <RadioGroup
+        android:id="@+id/rgpTemperature"
+        android:layout_width="380dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvWater"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTemperature">
+
+        <RadioButton
+            android:id="@+id/rbtnTemperature1"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Fahrenheit(F)" />
+
+        <RadioButton
+            android:id="@+id/rbtnTemperature2"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Celsius(C)" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tvWater"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="5dp"
+        android:text="Water"
+        app:layout_constraintBottom_toTopOf="@+id/textView8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rgpTemperature" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="13dp"
+        android:layout_marginBottom="11dp"
+        android:text="Tide height:"
+        app:layout_constraintBottom_toTopOf="@+id/rgpTide"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvWater" />
+
+    <RadioGroup
+        android:id="@+id/rgpTide"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvWaveheight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+        <RadioButton
+            android:id="@+id/rbtnTide1"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Meters" />
+
+        <RadioButton
+            android:id="@+id/rbtnTide2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Feet" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tvWaveheight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="6dp"
+        android:text="Wave height:"
+        app:layout_constraintBottom_toTopOf="@+id/rgpWave"
+        app:layout_constraintStart_toStartOf="@+id/rgpTide"
+        app:layout_constraintTop_toBottomOf="@+id/rgpTide" />
+
+    <RadioGroup
+        android:id="@+id/rgpWave"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnoutsettings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvWaveheight">
+
+        <RadioButton
+            android:id="@+id/rbtnWave1"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Meters" />
+
+        <RadioButton
+            android:id="@+id/rbtnWave2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Feet" />
+    </RadioGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/itmMap"
+        android:title="Map" />
+    <item
+        android:id="@+id/itmLocation"
+        android:title="My Locations" />
+    <item
+        android:id="@+id/itmCatches"
+        android:title="Catches" />
+    <item
+        android:id="@+id/itmWaves"
+        android:title="Waves" />
+    <item
+        android:id="@+id/itmWeather"
+        android:title="Weather" />
+    <item
+        android:id="@+id/itmsettings"
+        android:title="settings" />
+    <item
+        android:id="@+id/itmSignIn"
+        android:title="Sign Out" />
+
+
+</menu>
