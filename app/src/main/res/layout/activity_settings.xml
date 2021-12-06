@@ -118,17 +118,6 @@
     </RadioGroup>
 
     <TextView
-        android:id="@+id/tvWeather"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginBottom="4dp"
-        android:text="Weather"
-        app:layout_constraintBottom_toTopOf="@+id/tvTemperature"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rgpSpeed" />
-
-    <TextView
         android:id="@+id/tvTemperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -138,6 +127,17 @@
         app:layout_constraintBottom_toTopOf="@+id/rgpTemperature"
         app:layout_constraintStart_toStartOf="@+id/tvWeather"
         app:layout_constraintTop_toBottomOf="@+id/tvWeather" />
+
+    <TextView
+        android:id="@+id/tvWeather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="4dp"
+        android:text="Weather"
+        app:layout_constraintBottom_toTopOf="@+id/tvTemperature"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rgpSpeed" />
 
     <RadioGroup
         android:id="@+id/rgpTemperature"
@@ -169,12 +169,12 @@
         android:layout_marginStart="4dp"
         android:layout_marginBottom="5dp"
         android:text="Water"
-        app:layout_constraintBottom_toTopOf="@+id/textView8"
+        app:layout_constraintBottom_toTopOf="@+id/tvTide"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rgpTemperature" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/tvTide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="13dp"
@@ -194,7 +194,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tvWaveheight"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8">
+        app:layout_constraintTop_toBottomOf="@+id/tvTide">
 
         <RadioButton
             android:id="@+id/rbtnTide1"
