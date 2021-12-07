@@ -23,7 +23,7 @@
             android:id="@+id/UpEmail"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:hint="hint"
+            android:hint="Email"
             tools:ignore="TouchTargetSizeCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
