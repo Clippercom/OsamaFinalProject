@@ -15,6 +15,8 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class MainActivity extends AppCompatActivity {
     private TextView tvFishMain;
     private ListView lvMain;
@@ -61,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         {
             Toast.makeText(getApplicationContext(), "loging out", Toast.LENGTH_SHORT).show();
             dialogInterface.cancel();
+            FirebaseAuth auth=FirebaseAuth.getInstance();
+            auth.signOut();
             finish();
         }
         if( which == DialogInterface.BUTTON_NEGATIVE)

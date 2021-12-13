@@ -9,11 +9,10 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout3"
         android:layout_width="270dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="65dp"
         android:layout_marginEnd="61dp"
         android:layout_marginBottom="601dp"
-        android:hint="Email"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,15 +21,16 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/UpEmail"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:hint="Email"
+            android:inputType="textEmailAddress"
             tools:ignore="TouchTargetSizeCheck" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout4"
         android:layout_width="270dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="65dp"
         android:layout_marginEnd="61dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,14 +40,16 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/UpPassword"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:hint="Password" />
+            android:layout_height="match_parent"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:padding="20dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout5"
         android:layout_width="270dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="65dp"
         android:layout_marginEnd="61dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -57,14 +59,15 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/UpRePassword"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:hint="RePassword" />
+            android:layout_height="wrap_content"
+            android:hint="RePassword"
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout6"
         android:layout_width="270dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="65dp"
         android:layout_marginEnd="61dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,14 +77,14 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/UpName"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:hint="Full Name" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout7"
         android:layout_width="270dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="65dp"
         android:layout_marginEnd="61dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -91,7 +94,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/UpPhone"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:hint="Phone Number" />
     </com.google.android.material.textfield.TextInputLayout>
 
