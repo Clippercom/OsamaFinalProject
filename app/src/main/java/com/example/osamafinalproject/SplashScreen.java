@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class SplashScreen extends AppCompatActivity {
     private ImageView ivSplash;
     private TextView tvFishMap;
@@ -31,7 +33,11 @@ public class SplashScreen extends AppCompatActivity {
                 int i = 3 * 1000;//millseconds
                 try {
                     sleep(i);
-                    startActivity(new Intent(getApplicationContext(), SignUpActivity.class));
+                    FirebaseAuth auth =FirebaseAuth.getInstance();
+                    if (auth.getCurrentUser()==null)
+                         startActivity(new Intent(getApplicationContext(),SignInActivity.class));
+                    else
+                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
                 } catch (InterruptedException e)
                 {
                     e.printStackTrace();

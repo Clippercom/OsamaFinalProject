@@ -41,9 +41,8 @@ public class SignUpActivity extends AppCompatActivity {
         String RePassword = UpRePassword.getText().toString();
         String name = UpName.getText().toString();
         String Phone = UpPhone.getText().toString();
-        //String btn = btnUpsave.getText().toString();
-
         boolean isOK=true;
+
         if (email.length()<5 || email.indexOf('@')<=0)
         {
             UpEmail.setError("wrong email syntex");
