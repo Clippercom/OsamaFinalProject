@@ -43,31 +43,37 @@ public class SignUpActivity extends AppCompatActivity {
         String Phone = UpPhone.getText().toString();
         boolean isOK=true;
 
+        //1.يقوم بفحص ازا كان الايمال اطول من 5او يتضمن اشارة"@" ليختبر ازا كان صالح ام لا
         if (email.length()<5 || email.indexOf('@')<=0)
         {
             UpEmail.setError("wrong email syntex");
             isOK=false;
         }
+        //2.يتم بفحص ازا كان رقم الجوال 10 ارقام فانه ازا كان اكثر او اقل لا يقبل
         if (Phone.length()<10|| Phone.length()>10)
         {
             UpPhone.setError( "wrong phone number" );
             isOK=false;
         }
+        //3.يفحص ازا كانت كلمة المرور اكثر من 8 ارقام لانه لا يسمح باقل من 8 ارقام
         if(Password.length()<8)
         {
             UpPassword.setError("at lest 8 chars");
             isOK=false;
         }
+        //4.يتم بمقارنة كلمة المرور مع اعادة كلمة المرور للتأكيد
         if(Password.equals(RePassword)==false)
         {
             UpRePassword.setError("not equal passwords");
             isOK=false;
         }
+        //5.يتم بفحص ان خانة الاسم ليست فارغة
         if(name.length()==0)
         {
             UpName.setError("must to enter full name");
             isOK=false;
         }
+        //6.ازا كانت جميع الخانات مقبولة فأنه يتم ببناء حساب جديد
         if(isOK)
         {
             createAccount(email,Password);
