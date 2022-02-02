@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class AddLocations extends AppCompatActivity {
     private TextInputEditText etSubjectAddtask,etTitleAddtask;
@@ -63,7 +65,11 @@ public class AddLocations extends AppCompatActivity {
         {
             MyTask t=new MyTask();
 
-            String uid= FirebaseAuth.getInstance().ge
+            String uid= FirebaseAuth.getInstance().getCurrentUser().getUid();
+            MyTask.setOwner(uid);
+            FirebaseDatabase db=FirebaseDatabase.getInstance();
+            DatabaseReference ref= db.getReference();
+            MyTask.setKey();
         }
     }
 }
