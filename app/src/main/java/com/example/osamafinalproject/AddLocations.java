@@ -43,9 +43,6 @@ public class AddLocations extends AppCompatActivity {
             public void onClick(View v) {
                 validate();
             }
-
-            private void validate() {
-            }
         } );
 
     }
