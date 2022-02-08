@@ -40,33 +40,31 @@ public class AddLocations extends AppCompatActivity {
 
         btnAddtask.setOnClickListener( new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                validate();
+            public void onClick(View v)
+            {
+                validateFeilds();
             }
         } );
 
     }
-    public void validate()
+    private void validateFeilds()
     {
+        boolean isOk=true;
         String title=etTitleAddtask.getText().toString();
         String subject=etSubjectAddtask.getText().toString();
-        int progress=sbrAddtask.getProgress();
+        int Progress=sbrAddtask.getProgress();
         String s=sprAddtask.getSelectedItem().toString();
-        boolean isOk=true;
         if (title.length()==0)
         {
-            etTitleAddtask.setError( "must inter subject" );
+            etTitleAddtask.setError( "must inter Title" );
             isOk=false;
         }
         if (isOk)
         {
-            MyTask t=new MyTask();
+            MyTask myTask=new MyTask();
+            myTask.setTitle( title );
+            myTask.setSubject( subject );
 
-            String uid= FirebaseAuth.getInstance().getCurrentUser().getUid();
-            MyTask.setOwner(uid);
-            FirebaseDatabase db=FirebaseDatabase.getInstance();
-            DatabaseReference ref= db.getReference();
-            MyTask.setKey();
         }
     }
 }
