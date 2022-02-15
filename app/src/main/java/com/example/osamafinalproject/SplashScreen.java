@@ -24,6 +24,8 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         ivSplash = findViewById(R.id.ivSplash);tvFishMap = findViewById(R.id.tvFishMap);
+        FirebaseAuth auth =FirebaseAuth.getInstance();
+        boolean b=auth.getCurrentUser()==null;
         //thread 1
         Thread th = new Thread() {
             //thead2
@@ -33,8 +35,8 @@ public class SplashScreen extends AppCompatActivity {
                 int i = 3 * 1000;//millseconds
                 try {
                     sleep(i);
-                    FirebaseAuth auth =FirebaseAuth.getInstance();
-                    if (auth.getCurrentUser()==null)
+
+                    if (b)
                          startActivity(new Intent(getApplicationContext(),SignInActivity.class));
                     else
                         startActivity(new Intent(getApplicationContext(),MainActivity.class));

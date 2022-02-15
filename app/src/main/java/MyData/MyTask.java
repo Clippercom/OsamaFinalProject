@@ -8,6 +8,7 @@ public class MyTask
     private String owner;
     private int important;
     private String image;
+    private int necessity;
 
 
     public MyTask(){
@@ -61,4 +62,14 @@ public class MyTask
     public void setImage(String image) {
         this.image = image;
     }
+
+
+    public int getNecessity() {
+        return necessity;
+    }
+
+    public void setNecessity(int necessity) {
+        this.necessity = necessity;
+    }
 }
+
