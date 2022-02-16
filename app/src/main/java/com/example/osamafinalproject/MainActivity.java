@@ -17,7 +17,8 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DialogInterface.OnClickListener {
+
     private TextView tvFishMain;
     private ListView lvMain;
     private SearchView svMain;
