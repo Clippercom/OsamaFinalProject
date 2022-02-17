@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "396920736897",
+    "project_id": "osamafinalproject-c7b88",
+    "storage_bucket": "osamafinalproject-c7b88.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:396920736897:android:2038765c306334f6081180",
+        "android_client_info": {
+          "package_name": "com.example.osamafinalproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "396920736897-fnti8i3tqpj3clgn97rh26crhlqgmim7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIWwNjH-21JjLGNEjYbuMIZleiz87YT_I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "396920736897-fnti8i3tqpj3clgn97rh26crhlqgmim7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
