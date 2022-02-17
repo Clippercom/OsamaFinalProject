@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SplashScreen extends AppCompatActivity {
@@ -24,6 +25,8 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
         ivSplash = findViewById(R.id.ivSplash);tvFishMap = findViewById(R.id.tvFishMap);
+        FirebaseApp.initializeApp( getApplicationContext() );
+
         FirebaseAuth auth =FirebaseAuth.getInstance();
         boolean b=auth.getCurrentUser()==null;
         //thread 1
