@@ -28,9 +28,10 @@ public class SignInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
-        etEmail=findViewById(R.id.etEmail);etPassword=findViewById(R.id.etPassword);BtnSignIn=findViewById(R.id.BtnSignIn);BtnSignUp=findViewById(R.id.BtnSignUp);ivSignIn=findViewById(R.id.ivSignIn);tvSignIn=findViewById(R.id.tvSignIn);
+        etEmail=findViewById(R.id.etEmail);etPassword=findViewById(R.id.etPassword);
+        BtnSignIn=findViewById(R.id.BtnSignIn);BtnSignUp=findViewById(R.id.BtnSignUp);ivSignIn=findViewById(R.id.ivSignIn);tvSignIn=findViewById(R.id.tvSignIn);
 
-        BtnSignIn.setOnClickListener( new View.OnClickListener() {
+        BtnSignUp.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity( new Intent(getApplicationContext(),SignUpActivity.class ));
