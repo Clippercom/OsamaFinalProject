@@ -26,7 +26,13 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        UpEmail=findViewById(R.id.UpEmail);UpPassword=findViewById(R.id.UpPassword);UpRePassword=findViewById(R.id.UpRePassword);UpName=findViewById(R.id.UpName);UpPhone=findViewById(R.id.UpPhone);btnUpsave=findViewById(R.id.btnUpsave);ivSignUp=findViewById(R.id.ivSignUp);
+        UpEmail=findViewById(R.id.UpEmail);
+        UpPassword=findViewById(R.id.UpPassword);
+        UpRePassword=findViewById(R.id.UpRePassword);
+        UpName=findViewById(R.id.UpName);
+        UpPhone=findViewById(R.id.UpPhone);
+        btnUpsave=findViewById(R.id.btnUpsave);
+        ivSignUp=findViewById(R.id.ivSignUp);
 
         btnUpsave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,8 +43,8 @@ public class SignUpActivity extends AppCompatActivity {
     }
     private void validate(){
         String email = UpEmail.getText().toString();
-        String Password = UpPassword.getText().toString();
-        String RePassword = UpRePassword.getText().toString();
+        String pass1 = UpPassword.getText().toString();
+        String pass2 = UpRePassword.getText().toString();
         String name = UpName.getText().toString();
         String Phone = UpPhone.getText().toString();
         boolean isOK=true;
@@ -56,13 +62,13 @@ public class SignUpActivity extends AppCompatActivity {
             isOK=false;
         }
         //3.يفحص ازا كانت كلمة المرور اكثر من 8 ارقام لانه لا يسمح باقل من 8 ارقام
-        if(Password.length()<8)
+        if(pass1.length()<8)
         {
             UpPassword.setError("at lest 8 chars");
             isOK=false;
         }
         //4.يتم بمقارنة كلمة المرور مع اعادة كلمة المرور للتأكيد
-        if(Password.equals(RePassword)==false)
+        if(pass1.equals(pass2)==false)
         {
             UpRePassword.setError("not equal passwords");
             isOK=false;
@@ -76,13 +82,13 @@ public class SignUpActivity extends AppCompatActivity {
         //6.ازا كانت جميع الخانات مقبولة فأنه يتم ببناء حساب جديد
         if(isOK)
         {
-            createAccount(email,Password);
+            createAccount(email,pass1);
         }
     }
-    private void createAccount(String email,String Password)
+    private void createAccount(String email,String pass1)
     {
         FirebaseAuth auth=FirebaseAuth.getInstance();
-        auth.createUserWithEmailAndPassword( email, Password ).addOnCompleteListener( this, new OnCompleteListener<AuthResult>() {
+        auth.createUserWithEmailAndPassword( email, pass1 ).addOnCompleteListener( this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task. isSuccessful())
