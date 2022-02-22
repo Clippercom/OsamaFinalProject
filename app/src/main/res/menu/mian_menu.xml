@@ -6,7 +6,7 @@
         android:title="Map" />
     <item
         android:id="@+id/itmLocation"
-        android:title="My Locations" />
+        android:title="My locations" />
     <item
         android:id="@+id/itmCatches"
         android:title="Catches" />
