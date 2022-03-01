@@ -20,27 +20,40 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:context=".MainActivity">
 
-        <TextView
-            android:id="@+id/weatherLink"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:background="#cecece"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="Weather Link"
-            android:textColor="#ffffff"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+        <ImageButton
+            android:id="@+id/reportBtn"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/footer"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:background="#ffff00"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp"
+            android:src="@drawable/ic_launcher_foreground" />
 
-        <TextView
-            android:id="@+id/weather_title"
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/footer"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:background="#aaaaaa"
+            android:paddingLeft="10dp"
+            android:paddingTop="5dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="5dp"
+            android:src="@drawable/ic_launcher_foreground" />
+
+        <ImageView
+            android:id="@+id/footer"
             android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:background="#cecece"
-            android:gravity="center_vertical|center_horizontal"
-            android:text="Weather"
-            android:textColor="#ffffff"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:background="#E4E4E4" />
 
         <ImageView
             android:id="@+id/weather_border"
@@ -48,6 +61,13 @@
             android:layout_height="2dp"
             android:layout_below="@+id/weather_title"
             android:layout_marginBottom="10dp"
+            android:background="#CCCCCC" />
+
+        <ImageView
+            android:id="@+id/footer_border"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_above="@+id/footer"
             android:background="#CCCCCC" />
 
         <ScrollView
@@ -60,6 +80,28 @@
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/border2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/windText"
+                    android:background="#ff6600" />
+
+                <ImageView
+                    android:id="@+id/forecastBorder"
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/forecast_title"
+                    android:background="#CCCCCC" />
+
+                <ImageView
+                    android:id="@+id/icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:padding="10dp" />
 
                 <TextView
                     android:id="@+id/dateText"
@@ -112,13 +154,6 @@
                     android:textColor="#333333"
                     android:textSize="16sp" />
 
-                <ImageView
-                    android:id="@+id/border2"
-                    android:layout_width="fill_parent"
-                    android:layout_height="2dp"
-                    android:layout_below="@+id/windText"
-                    android:background="#ff6600" />
-
                 <TextView
                     android:id="@+id/forecast_title"
                     android:layout_width="fill_parent"
@@ -130,13 +165,6 @@
                     android:textColor="#333333"
                     android:textSize="18sp"
                     android:textStyle="bold" />
-
-                <ImageView
-                    android:id="@+id/forecastBorder"
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_below="@+id/forecast_title"
-                    android:background="#CCCCCC" />
 
                 <TextView
                     android:id="@+id/day1"
@@ -235,58 +263,30 @@
                     android:textAlignment="gravity"
                     android:textColor="#333333"
                     android:textSize="16sp" />
-
-                <ImageView
-                    android:id="@+id/icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:padding="10dp" />
             </RelativeLayout>
         </ScrollView>
 
-        <ImageView
-            android:id="@+id/footer_border"
+        <TextView
+            android:id="@+id/weatherLink"
             android:layout_width="fill_parent"
-            android:layout_height="2dp"
-            android:layout_above="@+id/footer"
-            android:background="#CCCCCC" />
+            android:layout_height="40dp"
+            android:background="#cecece"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Weather Link"
+            android:textColor="#ffffff"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/footer"
+        <TextView
+            android:id="@+id/weather_title"
             android:layout_width="fill_parent"
-            android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
-            android:background="#E4E4E4" />
-
-        <ImageButton
-            android:id="@+id/reportBtn"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/footer"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:background="#ffff00"
-            android:paddingLeft="10dp"
-            android:paddingTop="5dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="5dp"
-            android:src="@drawable/ic_launcher_foreground" />
-
-        <ImageButton
-            android:id="@+id/backBtn"
-            android:layout_width="160dp"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/footer"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentBottom="true"
-            android:background="#aaaaaa"
-            android:paddingLeft="10dp"
-            android:paddingTop="5dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="5dp"
-            android:src="@drawable/ic_launcher_foreground" />
+            android:layout_height="40dp"
+            android:background="#cecece"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Weather"
+            android:textColor="#ffffff"
+            android:textSize="22sp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 

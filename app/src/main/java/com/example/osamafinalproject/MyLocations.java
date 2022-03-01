@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -29,6 +30,13 @@ public class MyLocations extends AppCompatActivity {
         lvLocations=findViewById(R.id.lvLocations);
         ftLocations=findViewById( R.id.ftLocations );
 
+        ftLocations.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity( new Intent(getApplicationContext(),AddLocations.class) );
+            }
+        } );
+
     }
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.mian_menu,menu);
@@ -46,19 +54,9 @@ public class MyLocations extends AppCompatActivity {
             Intent i=new Intent(getApplicationContext(),MyLocations.class);
             startActivity( i );
         }
-        if(item.getItemId()==R.id.itmWaves)
-        {
-            Intent i=new Intent(getApplicationContext(),Waves.class);
-            startActivity(i);
-        }
         if(item.getItemId()==R.id.itmMap)
         {
             Intent i=new Intent(getApplicationContext(),MainActivity.class);
-            startActivity(i);
-        }
-        if(item.getItemId()==R.id.itmCatches)
-        {
-            Intent i=new Intent(getApplicationContext(),Catches.class);
             startActivity(i);
         }
         if(item.getItemId()==R.id.itmSignIn)
@@ -91,4 +89,5 @@ public class MyLocations extends AppCompatActivity {
             dialogInterface.cancel();
         }
     }
+
 }

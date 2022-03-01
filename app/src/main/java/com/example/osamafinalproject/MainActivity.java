@@ -49,19 +49,9 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
             Intent i=new Intent(getApplicationContext(),MyLocations.class);
             startActivity( i );
         }
-        if(item.getItemId()==R.id.itmWaves)
-        {
-            Intent i=new Intent(getApplicationContext(),Waves.class);
-            startActivity(i);
-        }
         if(item.getItemId()==R.id.itmMap)
         {
             Intent i=new Intent(getApplicationContext(),MainActivity.class);
-            startActivity(i);
-        }
-        if(item.getItemId()==R.id.itmCatches)
-        {
-            Intent i=new Intent(getApplicationContext(),Catches.class);
             startActivity(i);
         }
         if(item.getItemId()==R.id.itmSignIn)

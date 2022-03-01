@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".MyLocations">
 
+    <ListView
+        android:id="@+id/lvLocations"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginBottom="394dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/svLocations" />
+
     <SearchView
         android:id="@+id/svLocations"
         android:layout_width="0dp"
@@ -17,16 +27,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ListView
-        android:id="@+id/lvLocations"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:layout_marginBottom="394dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/svLocations" />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/ftLocations"
         android:layout_width="wrap_content"
@@ -36,5 +36,6 @@
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@android:drawable/ic_input_add"
+        tools:ignore="SpeakableTextPresentCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>
