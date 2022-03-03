@@ -8,12 +8,6 @@
         android:id="@+id/itmLocation"
         android:title="My locations" />
     <item
-        android:id="@+id/itmCatches"
-        android:title="Catches" />
-    <item
-        android:id="@+id/itmWaves"
-        android:title="Waves" />
-    <item
         android:id="@+id/itmWeather"
         android:title="Weather" />
     <item
