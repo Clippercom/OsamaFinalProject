@@ -32,9 +32,6 @@ public class AddLocations extends AppCompatActivity {
 
         etSubjectAddtask = findViewById( R.id.etSubjectAddtask );
         etTitleAddtask = findViewById( R.id.etTitleAddtask );
-        tvAddtask = findViewById( R.id.tvAddtask );
-        sprAddtask = findViewById( R.id.sprAddtask );
-        sbrAddtask = findViewById( R.id.sbrAddtask );
         imgAddtsak = findViewById( R.id.imgAddtsak );
         btnAddtask = findViewById( R.id.btnAddtask );
 

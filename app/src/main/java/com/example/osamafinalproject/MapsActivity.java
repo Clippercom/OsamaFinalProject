@@ -1,8 +1,12 @@
 package com.example.osamafinalproject;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -30,6 +34,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync( this );
     }
 
+
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -48,4 +53,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker( new MarkerOptions().position( sydney ).title( "Marker in Sydney" ) );
         mMap.moveCamera( CameraUpdateFactory.newLatLng( sydney ) );
     }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.mian_menu,menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.itmsettings) {
+            Intent i = new Intent( getApplicationContext(), SettingsActivity.class );
+            startActivity( i );
+        }
+        if (item.getItemId() == R.id.itmLocation) {
+            Intent i = new Intent( getApplicationContext(), MyLocations.class );
+            startActivity( i );
+        }
+        if (item.getItemId() == R.id.itmMap) {
+            Intent i = new Intent( getApplicationContext(), MainActivity.class );
+            startActivity( i );
+        }
+        return false;
+    }
+
 }
+
+
+
+
+
