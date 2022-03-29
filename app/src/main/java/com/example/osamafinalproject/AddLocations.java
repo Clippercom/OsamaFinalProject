@@ -1,6 +1,7 @@
 package com.example.osamafinalproject;
 
 import MyData.MyTask;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -10,7 +11,10 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -58,9 +62,32 @@ public class AddLocations extends AppCompatActivity {
         }
         if (isOk)
         {
-            MyTask myTask=new MyTask();
+            myTask=new MyTask();
             myTask.setTitle( title );
             myTask.setSubject( subject );
+
+            String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            myTask.setOwner(uid);
+
+            FirebaseDatabase db=FirebaseDatabase.getInstance();
+            DatabaseReference ref = db.getReference();
+
+            String key = ref.child("mytasks").push().getKey();
+            myTask.setKey(key);
+
+            ref.child("mytasks").child(uid).child(key).setValue(myTask).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {//response
+                    if(task.isSuccessful())
+                    {
+                        Toast.makeText(getApplicationContext(), "Add Successful", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(), "Add Not Successful", Toast.LENGTH_SHORT).show();
+                    }
+                }
 
         }
     }
