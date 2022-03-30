@@ -15,16 +15,18 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.osamafinalproject.databinding.ActivityMaps2Binding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private ActivityMaps2Binding binding;
+    private FloatingActionButton addMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
-
+        addMap=findViewById( R.id.addMap );
         binding = ActivityMaps2Binding.inflate( getLayoutInflater() );
         setContentView( binding.getRoot() );
 

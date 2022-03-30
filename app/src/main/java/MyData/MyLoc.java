@@ -1,17 +1,17 @@
 package MyData;
 
-public class MyTask
-{
+import com.google.android.gms.maps.model.LatLng;
+
+public class MyLoc {
     private String key;
     private String title;
     private String subject;
     private String owner;
-    private int important;
     private String image;
-    private int necessity;
+    private LatLng loc;
 
 
-    public MyTask(){
+    public MyLoc() {
 
     }
 
@@ -47,13 +47,6 @@ public class MyTask
         this.owner = owner;
     }
 
-    public int getImportant() {
-        return important;
-    }
-
-    public void setImportant(int important) {
-        this.important = important;
-    }
 
     public String getImage() {
         return image;
@@ -63,13 +56,12 @@ public class MyTask
         this.image = image;
     }
 
-
-    public int getNecessity() {
-        return necessity;
+    public void setLoc(LatLng loc) {
+        this.loc = loc;
     }
 
-    public void setNecessity(int necessity) {
-        this.necessity = necessity;
+    public LatLng getLoc() {
+        return loc;
     }
 }
 
