@@ -1,5 +1,7 @@
 package com.example.osamafinalproject;
 
+import MyData.MyLoc;
+import MyData.MyLocAdapter;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
@@ -11,6 +13,8 @@ import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -22,19 +26,42 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.osamafinalproject.databinding.ActivityMaps2Binding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private ActivityMaps2Binding binding;
     private FloatingActionButton addMap;
+    private SearchView srvMap;
+    private ListView lstvLocs;
+    private MyLocAdapter myLocAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
-        addMap=findViewById( R.id.addMap );
+        srvMap = findViewById( R.id.srvMap );
+        addMap = findViewById( R.id.addMap );
         binding = ActivityMaps2Binding.inflate( getLayoutInflater() );
         setContentView( binding.getRoot() );
+
+        lstvLocs = findViewById( R.id.lstvLocs );
+        myLocAdapter = new MyLocAdapter( this, R.layout.loc_item_layout );
+
+        lstvLocs.setAdapter( myLocAdapter );
+
+
+//        addMap.setOnClickListener( new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                startActivity( new Intent( getApplicationContext(), AddLocations.class ) );
+//            }
+//        } );
+
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -54,13 +81,43 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        readLocsFromFireBase("");
+    }
+
+    private void readLocsFromFireBase(String s) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        String uid = FirebaseAuth.getInstance().getUid();// cuurent user id.
+
+        //اضافة امكانية "التحتلن" بكل تغيير سيحصل على القيم في قاعدة البيانات
+        ref.child("mylocs").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                myLocAdapter.clear();
+                for (DataSnapshot d:dataSnapshot.getChildren())
+                {
+                    MyLoc t=d.getValue(MyLoc.class);
+                    myLocAdapter.add(t);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         // you can set menu header with title icon etc
         menu.setHeaderTitle("Add:");
         // add menu items
         menu.add(0, v.getId(), 0, "Location");
-        menu.add(0, v.getId(), 0, "Catch");
     }
 
     // menu item select listener
@@ -69,8 +126,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         if (item.getTitle() == "Location") {
             startActivity( new Intent(getApplicationContext(),AddLocations.class) );
-        } else if (item.getTitle() == "Catch") {
-            startActivity( new Intent(getApplicationContext(),MyLocations.class) );        }
+        }
 
         return true;
     }

@@ -17,6 +17,7 @@
         map:layout_constraintTop_toTopOf="parent">
 
         <SearchView
+            android:id="@+id/srvMap"
             android:layout_width="366dp"
             android:layout_height="wrap_content" />
 
@@ -29,6 +30,11 @@
 
         </fragment>
 
+        <ListView
+            android:id="@+id/lstvLocs"
+            android:layout_width="match_parent"
+            android:layout_height="234dp" />
+
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -37,5 +43,6 @@
         android:layout_height="wrap_content"
         android:src="@android:drawable/ic_input_add"
         map:layout_constraintBottom_toBottomOf="parent"
-        map:layout_constraintEnd_toEndOf="parent" />
+        map:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>
