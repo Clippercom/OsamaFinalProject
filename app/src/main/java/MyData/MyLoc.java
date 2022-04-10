@@ -8,7 +8,7 @@ public class MyLoc {
     private String subject;
     private String owner;
     private String image;
-    private LatLng loc;
+    private double lat,lang;
 
 
     public MyLoc() {
@@ -56,12 +56,20 @@ public class MyLoc {
         this.image = image;
     }
 
-    public void setLoc(LatLng loc) {
-        this.loc = loc;
+    public double getLat() {
+        return lat;
     }
 
-    public LatLng getLoc() {
-        return loc;
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLang() {
+        return lang;
+    }
+
+    public void setLang(double lang) {
+        this.lang = lang;
     }
 }
 

@@ -7,7 +7,7 @@
     tools:context=".AddLocations">
 
     <Button
-        android:id="@+id/btnAddLOC"
+        android:id="@+id/btnAddCAT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
@@ -18,17 +18,17 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
-        android:id="@+id/imgLoc"
+        android:id="@+id/imgCAT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:layout_marginTop="19dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvGPS"
+        app:layout_constraintTop_toBottomOf="@+id/tvGPSCAT"
         app:srcCompat="@android:drawable/ic_menu_mylocation" />
 
     <ImageView
-        android:id="@+id/imgAddLOC"
+        android:id="@+id/imgAddCAT"
         android:layout_width="248dp"
         android:layout_height="255dp"
         android:layout_marginBottom="236dp"
@@ -39,14 +39,14 @@
         app:srcCompat="@android:drawable/ic_menu_camera" />
 
     <TextView
-        android:id="@+id/tvGPS"
+        android:id="@+id/tvGPSCAT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="27dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgAddLOC" />
+        app:layout_constraintTop_toBottomOf="@+id/imgAddCAT" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout9"
@@ -58,7 +58,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout8">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etSubjectAddLOC"
+            android:id="@+id/etSubjectAddCAT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Subject"
@@ -75,7 +75,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etTitleAddLOC"
+            android:id="@+id/etTitleAddCAT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Title"
