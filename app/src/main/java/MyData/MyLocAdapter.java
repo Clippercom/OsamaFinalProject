@@ -1,6 +1,7 @@
 package MyData;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,8 +9,17 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.osamafinalproject.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,6 +59,9 @@ public class MyLocAdapter extends ArrayAdapter<MyLoc>
         ImageButton btnEdit=v.findViewById(R.id.itmBtnEdit);
         ImageView img=v.findViewById(R.id.itmImg);
 
+        if(item.getImage()!=null && item.getImage().length()>0 )
+            downloadImageToLocalFile(item.getImage(),img);   //connect item view to data source
+
         //وضع قيم المعطى المستخرج على كائنات الواجهة
         title.setText(item.getTitle());
         subj.setText(item.getSubject());
@@ -65,5 +78,31 @@ public class MyLocAdapter extends ArrayAdapter<MyLoc>
 
 
         return v;
+    }
+    private void downloadImageToLocalFile(String fileURL, final ImageView toView) {
+        StorageReference httpsReference = FirebaseStorage.getInstance().getReferenceFromUrl(fileURL);
+        final File localFile;
+        try {
+            localFile = File.createTempFile("images", "jpg");
+
+
+            httpsReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    // Local temp file has been created
+                    Toast.makeText(getContext(), "downloaded Image To Local File", Toast.LENGTH_SHORT).show();
+                    toView.setImageURI( Uri.fromFile(localFile));
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle any errors
+                    Toast.makeText(getContext(), "onFailure downloaded Image To Local File "+exception.getMessage(), Toast.LENGTH_SHORT).show();
+                    exception.printStackTrace();
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

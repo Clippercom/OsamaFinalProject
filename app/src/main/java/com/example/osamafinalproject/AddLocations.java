@@ -111,6 +111,7 @@ public class AddLocations extends AppCompatActivity {
              public void onClick(View view) {
                  if(toUploadimageUri!=null)
                  uploadImage( toUploadimageUri );
+                 btnAddLOC.setEnabled( false );
              }
          } );
 
@@ -192,7 +193,7 @@ public class AddLocations extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Uri> task) {
                                     downladuri = task.getResult();
                                     myLoc.setImage(downladuri.toString());
-
+                                    btnAddLOC.setEnabled( true );
 
                                 }
                             });
