@@ -48,6 +48,7 @@ public class MyLoc {
     }
 
 
+
     public String getImage() {
         return image;
     }

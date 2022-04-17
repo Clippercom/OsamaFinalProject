@@ -1,5 +1,5 @@
 package com.example.osamafinalproject;
-
+// https://github.com/Pritish-git/get-Current-Location/blob/main/MainActivity.java
 import MyData.MyLoc;
 import MyData.MyLocAdapter;
 import androidx.annotation.NonNull;
@@ -17,13 +17,13 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.example.osamafinalproject.databinding.ActivityMaps2Binding;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.example.osamafinalproject.databinding.ActivityMaps2Binding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;

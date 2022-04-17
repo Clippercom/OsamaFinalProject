@@ -8,11 +8,13 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
@@ -33,20 +35,36 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
+import com.google.firebase.storage.UploadTask;
+
+import java.util.UUID;
 
 public class AddLocations extends AppCompatActivity {
+    private static final int IMAGE_PICK_CODE = 100;
+    private static final int PERMISSION_CODE = 101;
     private TextInputEditText etSubjectAddlOC, etTitleAddLOC;
     private TextView   tvGPS;
     private ImageView imgAddLOC;
+    private Button btnUpload;
+    private Uri toUploadimageUri;
+    private Uri downladuri;
+    StorageTask uploadTask;
     private Button btnAddLOC;
     private ImageButton imgLoc;
     private LocationRequest locationRequest;
     private double longitude,latitude;
+    private MyLoc myLoc=new MyLoc();
 
 
     @Override
@@ -60,11 +78,41 @@ public class AddLocations extends AppCompatActivity {
         etTitleAddLOC = findViewById( R.id.etTitleAddCAT );
         imgAddLOC = findViewById( R.id.imgAddCAT );
         btnAddLOC = findViewById( R.id.btnAddCAT );
+        btnUpload=findViewById(R.id.btnUpload);
+
 
         locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         locationRequest.setInterval(5000);
         locationRequest.setFastestInterval(2000);
+
+
+        imgAddLOC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check runtime permission
+                Toast.makeText(getApplicationContext(), "image", Toast.LENGTH_SHORT).show();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                        //permission not granted, request it.
+                        String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
+                        //show popup for runtime permission
+                        requestPermissions(permissions, PERMISSION_CODE);
+                    } else {
+                        //permission already granted
+                        pickImageFromGallery();
+                    }
+
+                }
+            }
+        });
+         btnUpload.setOnClickListener( new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 if(toUploadimageUri!=null)
+                 uploadImage( toUploadimageUri );
+             }
+         } );
 
         imgLoc.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,7 +141,7 @@ public class AddLocations extends AppCompatActivity {
             isOk = false;
         }
         if (isOk) {
-            MyLoc myLoc = new MyLoc();
+           myLoc = new MyLoc();
             myLoc.setTitle( title );
             myLoc.setSubject( subject );
             myLoc.setLang( longitude );
@@ -123,6 +171,57 @@ public class AddLocations extends AppCompatActivity {
         }
     }
 
+    private void uploadImage(Uri filePath) {
+
+        if(filePath != null)
+        {
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Uploading...");
+            progressDialog.show();
+            FirebaseStorage storage= FirebaseStorage.getInstance();
+            StorageReference storageReference = storage.getReference();
+            final StorageReference ref = storageReference.child("images/"+ UUID.randomUUID().toString());
+            uploadTask=ref.putFile(filePath)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            progressDialog.dismiss();
+                            ref.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Uri> task) {
+                                    downladuri = task.getResult();
+                                    myLoc.setImage(downladuri.toString());
+
+
+                                }
+                            });
+
+                            Toast.makeText(getApplicationContext(), "Uploaded", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Toast.makeText(getApplicationContext(), "Failed "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0*taskSnapshot.getBytesTransferred()/taskSnapshot
+                                    .getTotalByteCount());
+                            progressDialog.setMessage("Uploaded "+(int)progress+"%");
+                        }
+                    });
+        }else
+        {
+            myLoc.setImage("");
+
+        }
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -140,6 +239,15 @@ public class AddLocations extends AppCompatActivity {
                 }
             }
         }
+        if(requestCode== PERMISSION_CODE)
+            if(grantResults.length>0 && grantResults[0]== PackageManager.PERMISSION_GRANTED){
+                //permission was granted
+                pickImageFromGallery();
+            }
+            else {
+                //permission was denied
+                Toast.makeText(this,"Permission denied...!",Toast.LENGTH_SHORT).show();
+            }
 
 
     }
@@ -150,9 +258,13 @@ public class AddLocations extends AppCompatActivity {
 
         if (requestCode == 2) {
             if (resultCode == Activity.RESULT_OK) {
-
                 getCurrentLocation();
             }
+        }
+        if (resultCode==RESULT_OK && requestCode== IMAGE_PICK_CODE){
+            //set image to image view
+            toUploadimageUri = data.getData();
+            imgAddLOC.setImageURI(toUploadimageUri);
         }
     }
 
@@ -248,5 +360,52 @@ public class AddLocations extends AppCompatActivity {
         return isEnabled;
 
     }
+
+    private void pickImageFromGallery(){
+        //intent to pick image
+        Intent intent=new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent,IMAGE_PICK_CODE);
+    }
+
+
+    //handle result of picked images
+
+
+//    private void createLocations(MyLocations t)
+//    {
+//        //.1
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        //.2
+//        DatabaseReference reference =
+//                database.getReference();
+//        //to get the user uid (or other details like email)
+//        FirebaseAuth auth=FirebaseAuth.getInstance();
+//        String uid = auth.getCurrentUser().getUid();
+//        t.setOwner(uid);
+//
+//        String key = reference.child("tasks").push().getKey();
+//        t.setKey(key);
+//        reference.child("tasks").child(uid).child(key).setValue(t).
+//                addOnCompleteListener(AddLocations.this, new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        if(task.isSuccessful())
+//                        {
+//                            Toast.makeText(AddTaskActivity.this, "add successful", Toast.LENGTH_SHORT).show();
+//                            finish();
+//                        }
+//                        else
+//                        {
+//                            Toast.makeText(AddTaskActivity.this, "add failed"+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+//                            task.getException().printStackTrace();
+//                        }
+//
+//                    }
+//                });
+//
+//
+//
+//    }
 
 }
