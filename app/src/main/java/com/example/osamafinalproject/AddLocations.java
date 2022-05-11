@@ -142,7 +142,6 @@ public class AddLocations extends AppCompatActivity {
             isOk = false;
         }
         if (isOk) {
-           myLoc = new MyLoc();
             myLoc.setTitle( title );
             myLoc.setSubject( subject );
             myLoc.setLang( longitude );
