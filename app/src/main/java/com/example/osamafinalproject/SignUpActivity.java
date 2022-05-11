@@ -94,7 +94,7 @@ public class SignUpActivity extends AppCompatActivity {
                 if(task. isSuccessful())
                 {
                     finish();
-                    startActivity( new Intent(getApplicationContext(),MainActivity.class));
+                    startActivity( new Intent(getApplicationContext(),MapsActivity.class));
                 }
                 else
                 {

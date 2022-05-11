@@ -56,7 +56,7 @@ public class MyLocations extends AppCompatActivity {
         }
         if(item.getItemId()==R.id.itmMap)
         {
-            Intent i=new Intent(getApplicationContext(),MainActivity.class);
+            Intent i=new Intent(getApplicationContext(),MapsActivity.class);
             startActivity(i);
         }
         if(item.getItemId()==R.id.itmSignIn)

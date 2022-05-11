@@ -39,9 +39,6 @@
             android:name=".MyLocations"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
-            android:exported="true" />
-        <activity
             android:name=".SplashScreen"
             android:exported="true">
             <intent-filter>

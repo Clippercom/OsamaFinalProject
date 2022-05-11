@@ -148,7 +148,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         if(item.getItemId()==R.id.itmMap)
         {
-            Intent i=new Intent(getApplicationContext(),MainActivity.class);
+            Intent i=new Intent(getApplicationContext(),MapsActivity.class);
             startActivity(i);
         }
         if(item.getItemId()==R.id.itmSignIn)
@@ -198,9 +198,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng( -34, 151 );
-        mMap.addMarker( new MarkerOptions().position( sydney ).title( "Marker in Sydney" ) );
-        mMap.moveCamera( CameraUpdateFactory.newLatLng( sydney ) );
+//        LatLng sydney = new LatLng( -34, 151 );
+//        mMap.addMarker( new MarkerOptions().position( sydney ).title( "Marker in Sydney" ) );
+//        mMap.moveCamera( CameraUpdateFactory.newLatLng( sydney ) );
+
+        for (int i = 0; i < myLocAdapter.getCount(); i++) {
+            MyLoc item = myLocAdapter.getItem( i );
+            LatLng loc = new LatLng( item.getLat(), item.getLang() );
+            mMap.addMarker( new MarkerOptions().position( loc ).title( item.getTitle() ) );
+            if(i==0)
+              mMap.moveCamera( CameraUpdateFactory.newLatLng( loc ) );
+        }
     }
 
 //    public boolean onCreateOptionsMenu(Menu menu) {

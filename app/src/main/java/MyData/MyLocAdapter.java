@@ -54,9 +54,9 @@ public class MyLocAdapter extends ArrayAdapter<MyLoc>
         //تجهيز مؤشر لكل كائن على الواجهة
         TextView title=v.findViewById(R.id.itmLocTitle );
         TextView subj=v.findViewById(R.id.itmLocSubject );
-        ImageButton btnDel=v.findViewById(R.id.itmBtnDel);
-        ImageButton btngo=v.findViewById(R.id.itmBtnGo );
-        ImageButton btnEdit=v.findViewById(R.id.itmBtnEdit);
+        ImageView btnDel=v.findViewById(R.id.itmBtnDel);
+        ImageView btngo=v.findViewById(R.id.itmBtnGo );
+        ImageView btnEdit=v.findViewById(R.id.itmBtnEdit);
         ImageView img=v.findViewById(R.id.itmImg);
 
         if(item.getImage()!=null && item.getImage().length()>0 )

@@ -74,7 +74,7 @@ public class SignInActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Toast.makeText( getApplicationContext(), "signing in successful", Toast.LENGTH_SHORT ).show();
                             finish();
-                            startActivity( new Intent( getApplicationContext(), MainActivity.class ) );
+                            startActivity( new Intent( getApplicationContext(), MapsActivity.class ) );
                         }
                         else
                             Toast.makeText( getApplicationContext(), "signing in erorr"+task.getException().getMessage(), Toast.LENGTH_SHORT ).show();
