@@ -96,10 +96,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 myLocAdapter.clear();
+                int i=0;
                 for (DataSnapshot d:dataSnapshot.getChildren())
                 {
                     MyLoc t=d.getValue(MyLoc.class);
                     myLocAdapter.add(t);
+                    if(mMap!=null) {
+                        LatLng loc = new LatLng( t.getLat(), t.getLang() );
+                        mMap.addMarker( new MarkerOptions().position( loc ).title( t.getTitle() ) );
+                        if (i == 0) {
+                            mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(  loc,14 ) );
+                            i++;
+                        }
+                    }
+
                 }
             }
 
@@ -202,13 +212,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        mMap.addMarker( new MarkerOptions().position( sydney ).title( "Marker in Sydney" ) );
 //        mMap.moveCamera( CameraUpdateFactory.newLatLng( sydney ) );
 
-        for (int i = 0; i < myLocAdapter.getCount(); i++) {
-            MyLoc item = myLocAdapter.getItem( i );
-            LatLng loc = new LatLng( item.getLat(), item.getLang() );
-            mMap.addMarker( new MarkerOptions().position( loc ).title( item.getTitle() ) );
-            if(i==0)
-              mMap.moveCamera( CameraUpdateFactory.newLatLng( loc ) );
-        }
+//        for (int i = 0; i < myLocAdapter.getCount(); i++) {
+//            MyLoc item = myLocAdapter.getItem( i );
+//            LatLng loc = new LatLng( item.getLat(), item.getLang() );
+//            mMap.addMarker( new MarkerOptions().position( loc ).title( item.getTitle() ) );
+//            if(i==0)
+//              mMap.moveCamera( CameraUpdateFactory.newLatLng( loc ) );
+//        }
     }
 
 //    public boolean onCreateOptionsMenu(Menu menu) {
