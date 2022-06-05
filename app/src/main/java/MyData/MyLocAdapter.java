@@ -1,19 +1,27 @@
 package MyData;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.osamafinalproject.AddLocations;
 import com.example.osamafinalproject.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -54,11 +62,52 @@ public class MyLocAdapter extends ArrayAdapter<MyLoc>
         //تجهيز مؤشر لكل كائن على الواجهة
         TextView title=v.findViewById(R.id.itmLocTitle );
         TextView subj=v.findViewById(R.id.itmLocSubject );
-        ImageView btnDel=v.findViewById(R.id.itmBtnDel);
-        ImageView btngo=v.findViewById(R.id.itmBtnGo );
-        ImageView btnEdit=v.findViewById(R.id.itmBtnEdit);
+        Button btnDel=v.findViewById(R.id.itmBtnDel);
+        Button btngo=v.findViewById(R.id.itmBtnGo );
+        Button btnEdit=v.findViewById(R.id.itmBtnEdit);
         ImageView img=v.findViewById(R.id.itmImg);
+         btnDel.setOnClickListener( new View.OnClickListener() {
+             @Override
+             public void onClick(View view) {
+                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+// Add the buttons
+                 builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                     public void onClick(DialogInterface dialog, int id) {
+                         //String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+                         FirebaseDatabase db = FirebaseDatabase.getInstance();
+                         DatabaseReference ref = db.getReference();
+                         ref.child( "mylocs" ).child( item.getKey() ).removeValue();
+                         dialog.dismiss();
+                     }
+                 });
+                 builder.setNegativeButton("no", new DialogInterface.OnClickListener() {
+                     public void onClick(DialogInterface dialog, int id) {
+                         // User cancelled the dialog
+                         dialog.dismiss();
+                     }
+                 });
+// Set other dialog properties
+
+// Create the AlertDialog
+                 AlertDialog dialog = builder.create();
+                 dialog.show();
+             }
+         } );
+        btnEdit.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(getContext(), AddLocations.class );
+                i.putExtra( "loc",item );
+                getContext().startActivity( i );
+            }
+        } );
+        btngo.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        } );
         if(item.getImage()!=null && item.getImage().length()>0 )
             downloadImageToLocalFile(item.getImage(),img);   //connect item view to data source
 

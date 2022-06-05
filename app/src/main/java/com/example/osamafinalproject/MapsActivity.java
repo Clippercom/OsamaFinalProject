@@ -13,6 +13,7 @@ import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -53,7 +54,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         myLocAdapter = new MyLocAdapter( this, R.layout.loc_item_layout );
 
         lstvLocs.setAdapter( myLocAdapter );
-
+        lstvLocs.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                MyLoc t= (MyLoc) adapterView.getItemAtPosition( i );
+                LatLng loc = new LatLng( t.getLat(), t.getLang() );
+                mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(  loc,14 ) );
+            }
+        } );
 
 //        addMap.setOnClickListener( new View.OnClickListener() {
 //            @Override

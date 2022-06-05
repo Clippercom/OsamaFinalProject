@@ -42,12 +42,15 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.UUID;
 
 public class AddLocations extends AppCompatActivity {
@@ -66,11 +69,17 @@ public class AddLocations extends AppCompatActivity {
     private double longitude,latitude;
     private MyLoc myLoc=new MyLoc();
 
+    private boolean edit=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_add_locations );
+        Intent i=getIntent();
+        if(i.getExtras().containsKey( "loc" )){
+            edit=true;
+            myLoc= (MyLoc) i.getExtras().get("loc");
+        }
 
         tvGPS  = findViewById( R.id.tvGPSCAT );//AddressText
         imgLoc = findViewById( R.id.imgCAT );//LocationButton
@@ -79,7 +88,14 @@ public class AddLocations extends AppCompatActivity {
         imgAddLOC = findViewById( R.id.imgAddCAT );
         btnAddLOC = findViewById( R.id.btnAddCAT );
         btnUpload=findViewById(R.id.btnUpload);
-
+        if (edit==true){
+            etSubjectAddlOC.setText( myLoc.getSubject() );
+            etTitleAddLOC.setText( myLoc.getTitle());
+            btnAddLOC.setText( "update" );
+            latitude=myLoc.getLat();
+            longitude=myLoc.getLang();
+            downloadImageToLocalFile( myLoc.getImage(),imgAddLOC );
+        }
 
         locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -152,9 +168,11 @@ public class AddLocations extends AppCompatActivity {
 
             FirebaseDatabase db = FirebaseDatabase.getInstance();
             DatabaseReference ref = db.getReference();
-
-            String key = ref.child( "mylocs" ).push().getKey();
-            myLoc.setKey( key );
+           String key=myLoc.getKey();
+            if(edit==false) {
+                key = ref.child( "mylocs" ).push().getKey();
+                myLoc.setKey( key );
+            }
 
             ref.child( "mylocs" ).child( key ).setValue( myLoc ).addOnCompleteListener( new OnCompleteListener<Void>() {
                 @Override
@@ -407,5 +425,30 @@ public class AddLocations extends AppCompatActivity {
 //
 //
 //    }
+private void downloadImageToLocalFile(String fileURL, final ImageView toView) {
+    StorageReference httpsReference = FirebaseStorage.getInstance().getReferenceFromUrl(fileURL);
+    final File localFile;
+    try {
+        localFile = File.createTempFile("images", "jpg");
 
+
+        httpsReference.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                // Local temp file has been created
+                Toast.makeText(getApplicationContext(), "downloaded Image To Local File", Toast.LENGTH_SHORT).show();
+                toView.setImageURI( Uri.fromFile(localFile));
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+                Toast.makeText(getApplicationContext(), "onFailure downloaded Image To Local File "+exception.getMessage(), Toast.LENGTH_SHORT).show();
+                exception.printStackTrace();
+            }
+        });
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
 }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="150dp">
 
-    <ImageView
+    <Button
         android:id="@+id/itmBtnDel"
         android:layout_width="70dp"
         android:layout_height="50dp"
@@ -20,7 +20,7 @@
         app:srcCompat="@android:drawable/ic_menu_delete"
         tools:srcCompat="@android:drawable/ic_menu_delete" />
 
-    <ImageView
+    <Button
         android:id="@+id/itmBtnGo"
         android:layout_width="70dp"
         android:layout_height="50dp"
@@ -29,12 +29,13 @@
         android:contentDescription="go task"
         android:minWidth="48dp"
         android:minHeight="48dp"
+        android:text="nav"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/itmBtnEdit"
         app:srcCompat="@android:drawable/ic_media_play"
         tools:srcCompat="@android:drawable/ic_search_category_default" />
 
-    <ImageView
+    <Button
         android:id="@+id/itmBtnEdit"
         android:layout_width="70dp"
         android:layout_height="50dp"
@@ -43,6 +44,7 @@
         android:contentDescription="edit task"
         android:minWidth="48dp"
         android:minHeight="48dp"
+        android:text="edit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_menu_edit"
@@ -50,8 +52,8 @@
 
     <ImageView
         android:id="@+id/itmImg"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="7dp"
         android:layout_marginBottom="25dp"

@@ -2,7 +2,9 @@ package MyData;
 
 import com.google.android.gms.maps.model.LatLng;
 
-public class MyLoc {
+import java.io.Serializable;
+
+public class MyLoc implements Serializable {
     private String key;
     private String title;
     private String subject;
