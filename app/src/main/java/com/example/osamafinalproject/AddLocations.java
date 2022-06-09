@@ -76,7 +76,7 @@ public class AddLocations extends AppCompatActivity {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_add_locations );
         Intent i=getIntent();
-        if(i.getExtras().containsKey( "loc" )){
+        if(i.getExtras()!=null && i.getExtras().containsKey( "loc" )){
             edit=true;
             myLoc= (MyLoc) i.getExtras().get("loc");
         }

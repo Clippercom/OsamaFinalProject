@@ -1,13 +1,18 @@
 package com.example.osamafinalproject;
 // https://github.com/Pritish-git/get-Current-Location/blob/main/MainActivity.java
+
 import MyData.MyLoc;
 import MyData.MyLocAdapter;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -57,9 +62,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         lstvLocs.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                MyLoc t= (MyLoc) adapterView.getItemAtPosition( i );
+                MyLoc t = (MyLoc) adapterView.getItemAtPosition( i );
                 LatLng loc = new LatLng( t.getLat(), t.getLang() );
-                mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(  loc,14 ) );
+                mMap.moveCamera( CameraUpdateFactory.newLatLngZoom( loc, 14 ) );
             }
         } );
 
@@ -76,23 +81,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById( R.id.map );
         mapFragment.getMapAsync( this );
 
-        addMap=findViewById(R.id.addMap);
+        addMap = findViewById( R.id.addMap );
         registerForContextMenu( addMap );
         addMap.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Toast.makeText( getApplicationContext(), "PLEASE LONG CLICK", Toast.LENGTH_SHORT ).show();
-                MapsActivity.this.openContextMenu(view);
+                MapsActivity.this.openContextMenu( view );
 
             }
         } );
 
     }
+
     @Override
     protected void onResume() {
         super.onResume();
 
-        readLocsFromFireBase("");
+        readLocsFromFireBase( "" );
     }
 
     private void readLocsFromFireBase(String s) {
@@ -100,20 +106,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         String uid = FirebaseAuth.getInstance().getUid();// cuurent user id.
 
         //اضافة امكانية "التحتلن" بكل تغيير سيحصل على القيم في قاعدة البيانات
-        ref.child("mylocs").addValueEventListener(new ValueEventListener() {
+        ref.child( "mylocs" ).addValueEventListener( new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 myLocAdapter.clear();
-                int i=0;
-                for (DataSnapshot d:dataSnapshot.getChildren())
-                {
-                    MyLoc t=d.getValue(MyLoc.class);
-                    myLocAdapter.add(t);
-                    if(mMap!=null) {
+                int i = 0;
+                for (DataSnapshot d : dataSnapshot.getChildren()) {
+                    MyLoc t = d.getValue( MyLoc.class );
+                    myLocAdapter.add( t );
+                    if (mMap != null) {
                         LatLng loc = new LatLng( t.getLat(), t.getLang() );
                         mMap.addMarker( new MarkerOptions().position( loc ).title( t.getTitle() ) );
                         if (i == 0) {
-                            mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(  loc,14 ) );
+                            mMap.moveCamera( CameraUpdateFactory.newLatLngZoom( loc, 14 ) );
                             i++;
                         }
                     }
@@ -125,17 +130,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });
+        } );
 
     }
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
+        super.onCreateContextMenu( menu, v, menuInfo );
         // you can set menu header with title icon etc
-        menu.setHeaderTitle("Add:");
+        menu.setHeaderTitle( "Add:" );
         // add menu items
-        menu.add(0, v.getId(), 0, "Location");
+        menu.add( 0, v.getId(), 0, "Location" );
     }
 
     // menu item select listener
@@ -143,39 +148,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public boolean onContextItemSelected(MenuItem item) {
 
         if (item.getTitle() == "Location") {
-            startActivity( new Intent(getApplicationContext(),AddLocations.class) );
+            startActivity( new Intent( getApplicationContext(), AddLocations.class ) );
         }
 
         return true;
     }
+
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.mian_menu,menu);
+        getMenuInflater().inflate( R.menu.mian_menu, menu );
         return true;
     }
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if(item.getItemId()==R.id.itmsettings)
-        {
-            Intent i=new Intent(getApplicationContext(),SettingsActivity.class);
-            startActivity(i);
-        }
-        if(item.getItemId()==R.id.itmLocation)
-        {
-            Intent i=new Intent(getApplicationContext(),MyLocations.class);
+        if (item.getItemId() == R.id.itmsettings) {
+            Intent i = new Intent( getApplicationContext(), SettingsActivity.class );
             startActivity( i );
         }
-        if(item.getItemId()==R.id.itmMap)
-        {
-            Intent i=new Intent(getApplicationContext(),MapsActivity.class);
-            startActivity(i);
+        if (item.getItemId() == R.id.itmLocation) {
+            Intent i = new Intent( getApplicationContext(), MyLocations.class );
+            startActivity( i );
         }
-        if(item.getItemId()==R.id.itmSignIn)
-        {
-            AlertDialog.Builder builder=new AlertDialog.Builder(this);
-            builder.setMessage("Are you sure?");
-            builder.setCancelable(true);
-            builder.setPositiveButton("Yes",this::onClick);
-            builder.setNegativeButton("No",this::onClick);
+        if (item.getItemId() == R.id.itmMap) {
+            Intent i = new Intent( getApplicationContext(), MapsActivity.class );
+            startActivity( i );
+        }
+        if (item.getItemId() == R.id.itmSignIn) {
+            AlertDialog.Builder builder = new AlertDialog.Builder( this );
+            builder.setMessage( "Are you sure?" );
+            builder.setCancelable( true );
+            builder.setPositiveButton( "Yes", this::onClick );
+            builder.setNegativeButton( "No", this::onClick );
             AlertDialog dialog = builder.create();
             dialog.show();
 
@@ -185,21 +187,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public void onClick(DialogInterface dialogInterface, int which) {
-        if(which == dialogInterface.BUTTON_POSITIVE)
-        {
-            Toast.makeText(getApplicationContext(), "loging out", Toast.LENGTH_SHORT).show();
+        if (which == dialogInterface.BUTTON_POSITIVE) {
+            Toast.makeText( getApplicationContext(), "loging out", Toast.LENGTH_SHORT ).show();
             dialogInterface.cancel();
-            FirebaseAuth auth=FirebaseAuth.getInstance();
+            FirebaseAuth auth = FirebaseAuth.getInstance();
             auth.signOut();
             finish();
         }
-        if( which == DialogInterface.BUTTON_NEGATIVE)
-        {
-            Toast.makeText(getApplicationContext(), "loging out canceled", Toast.LENGTH_SHORT).show();
+        if (which == DialogInterface.BUTTON_NEGATIVE) {
+            Toast.makeText( getApplicationContext(), "loging out canceled", Toast.LENGTH_SHORT ).show();
             dialogInterface.cancel();
         }
     }
-
 
 
     /**
@@ -227,6 +226,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //            if(i==0)
 //              mMap.moveCamera( CameraUpdateFactory.newLatLng( loc ) );
 //        }
+        if (ActivityCompat.checkSelfPermission( this, Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission( this, Manifest.permission.ACCESS_COARSE_LOCATION ) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        mMap.setMyLocationEnabled( true );
+        // Check if we were successful in obtaining the map.
+        if (mMap != null) {
+            mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
+                @Override
+                public void onMyLocationChange(Location arg0) {
+                    mMap.addMarker(new MarkerOptions().position(new LatLng(arg0.getLatitude(), arg0.getLongitude())).title("It's Me!"));
+                }
+            });
+        }
     }
 
 //    public boolean onCreateOptionsMenu(Menu menu) {
