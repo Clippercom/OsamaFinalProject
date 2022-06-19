@@ -96,7 +96,7 @@ public class AddLocations extends AppCompatActivity {
             longitude=myLoc.getLang();
             downloadImageToLocalFile( myLoc.getImage(),imgAddLOC );
         }
-
+         //service:
         locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         locationRequest.setInterval(5000);
@@ -241,7 +241,8 @@ public class AddLocations extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)//שחמוש בגליה וGPS
+    {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (requestCode == 1){
@@ -271,10 +272,12 @@ public class AddLocations extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data)
+    {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 2) {
+        if (requestCode == 2) //
+        {
             if (resultCode == Activity.RESULT_OK) {
                 getCurrentLocation();
             }
